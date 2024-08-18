@@ -4,9 +4,28 @@ console.log('Express Tutorial');
 const express = require('express');
 
 // Import products from data.js
-const { products } = require('./data');
+const { products, people } = require('./data');
 
 const app = express();
+const peopleRouter = require('./routes/people');
+
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.url} ${new Date().getFullYear()}`);
+  next();
+};
+
+// Use logger middleware for all routes
+app.use(logger);
+
+// Use the people router for /api/v1/people routes
+app.use('/api/v1/people', peopleRouter);
+
+app.use(express.static('./methods-public'));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+
 
 app.use(express.static('./public'));
 
@@ -78,6 +97,7 @@ app.get('/about', (req, res) => {
 app.all('*', (req, res) => {
   res.status(404).send('Page not found');
 });
+
 
 // Tell the server to listen for requests on port 3000
 app.listen(3000, () => {

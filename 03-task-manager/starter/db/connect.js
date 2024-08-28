@@ -3,7 +3,7 @@ const db_password = process.env.DATABASE_PASSWORD;
 require('dotenv').config();
 
 const connectionString = 
-`mongodb+srv://kionish:jumBo100@nodeexpressprojectctd.r18zy.mongodb.net/03-TASK-MANAGER?retryWrites=true&w=majority`
+`mongodb+srv://kionish:${db_password}@nodeexpressprojectctd.r18zy.mongodb.net/03-TASK-MANAGER?retryWrites=true&w=majority`
 //&appName=NodeExpressProjectCTD'
 
 mongoose

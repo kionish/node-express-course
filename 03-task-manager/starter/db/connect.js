@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
-const db_password = process.env.DATABASE_PASSWORD;
-require('dotenv').config();
 
-const connectionString = 
-`mongodb+srv://kionish:${db_password}@nodeexpressprojectctd.r18zy.mongodb.net/03-TASK-MANAGER?retryWrites=true&w=majority`
-//&appName=NodeExpressProjectCTD'
+
+require('dotenv').config();
+const MONGO_URI = process.env.MONGO_URI;
+
+//console.log(db_password)
+
+const connectionString = MONGO_URI
 
 mongoose
     .connect(connectionString, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useCreateIndex: true,
+        // useFindAndModify: false,
+        // useUnifiedTopology: true,
     })
     .then(()=> console.log('CONNECTED TO THE DB...'))
     .catch((err)=> console.log(err))
 
-
-console.log(db_password)
 
 
 

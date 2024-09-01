@@ -1,0 +1,25 @@
+1. In this lesson, you created a middleware function called asyncWrapper. Why?
+
+      To eliminate repeated try/catch blocks, and understand what the NPM packages we will be using later will be doing.
+
+2. Suppose that you want to make sure that both a status code and an error message are sent back to the user when they request the URL for a task that does not exist. Assume that you’ve created a CustomAPIError class and an error handler that references that class. Complete the code:
+
+      class CustomAPIError extends Error {
+        constructor(message, statusCode) {
+          super(message);
+          this.statusCode = statusCode;
+        }
+      }
+
+      const createCustomError = (msg, statusCode) => {
+        return new CustomAPIError(msg, statusCode);
+      };
+
+      const getTask = asyncWrapper(async (req, res, next) => {  
+        const { id: taskID } = req.params;  
+        const task = await Task.findOne({ _id: taskID });  
+        if (!task) {  
+          return next(createCustomError(`No task with ID: ${taskID}`, 404));
+        }  
+        res.status(200).json({ task });  
+      }); 

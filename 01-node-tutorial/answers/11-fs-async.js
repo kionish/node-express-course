@@ -23,12 +23,12 @@ fs.writeFile(filePath, 'This is your first clue.\n', (err) => {
                     } else {
                         console.log("All clues have been written.");
                         //had to move this console log to inside the call back because it was coming before the async function.
-                        console.log("Script Complete");
+
                     }
                 });
             }
         });
     }
 });
-
+console.log("Script Complete");
 
